@@ -1,7 +1,4 @@
 spring:
-  flyway:
-    enabled: 'true'
-    baselineOnMigrate: 'true'
   jpa:
     properties:
       hibernate:
@@ -14,3 +11,15 @@ spring:
     password: root
     username: postgres
     url: jdbc:postgresql://localhost:5432/contact-managment
+
+
+flyway:
+    baselineOnMigrate: 'true'
+    url: jdbc:postgresql://localhost:5432
+    user: postgres
+    password: root
+    schemas: contact-managment
+    locations: filesystem:db/migration
+
+
+

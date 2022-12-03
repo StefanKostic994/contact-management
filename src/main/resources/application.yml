@@ -11,7 +11,8 @@ spring:
     password: root
     username: postgres
     url: jdbc:postgresql://localhost:5432/contact-managment
-
+  main:
+    allow-circular-references: 'true'
 
 flyway:
     baselineOnMigrate: 'true'

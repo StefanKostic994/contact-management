@@ -1,5 +1,5 @@
-CREATE TYPE role_name AS ENUM ('user', 'admin');
-CREATE TYPE contact_type AS ENUM ('family', 'friend', 'work');
+CREATE TYPE role AS ENUM ('USER', 'ADMIN');
+CREATE TYPE contact_type AS ENUM ('FAMILY', 'FRIEND', 'WORK');
 
 CREATE TABLE "users" (
   "user_id" INT GENERATED ALWAYS AS IDENTITY,
@@ -7,8 +7,8 @@ CREATE TABLE "users" (
   "last_name" VARCHAR(50) NOT NULL,
   "address_name" VARCHAR(50) NOT NULL,
   "username" VARCHAR(50)NOT NULL UNIQUE,
-  "password" VARCHAR(50)NOT NULL,
-  "role_name" role_name NOT NULL,
+  "password" VARCHAR(150)NOT NULL,
+  "role" VARCHAR(50) NOT NULL,
   PRIMARY KEY(user_id)
 );
 

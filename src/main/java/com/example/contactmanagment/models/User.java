@@ -1,9 +1,12 @@
 package com.example.contactmanagment.models;
 
-import com.example.contactmanagment.dtos.ContactDTO;
-import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,7 +14,7 @@ import java.util.Objects;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"username"})
 })
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role",nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
@@ -90,8 +94,34 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        return Collections.singleton(authority);
     }
 
     public String getPassword() {
@@ -129,5 +159,19 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, address, username, password, role, listOfContacts);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", listOfContacts=" + listOfContacts +
+                '}';
     }
 }

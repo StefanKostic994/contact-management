@@ -14,7 +14,7 @@ spring:
   datasource:
     password: root
     username: postgres
-    url: jdbc:postgresql://localhost:5432/contact-managment
+    url: jdbc:postgresql://localhost:5432/contact management
   main:
     allow-circular-references: 'true'
 
@@ -23,8 +23,11 @@ flyway:
     url: jdbc:postgresql://localhost:5432
     user: postgres
     password: root
-    schemas: contact-managment
+    schemas: contact management
     locations: filesystem:db/migration
+
+
+
 
 
 

@@ -1,17 +1,31 @@
 package com.example.contactmanagment.dtos;
 
 import com.example.contactmanagment.models.Role;
+import com.example.contactmanagment.validators.Username;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
 public class UserRegistrationDTO {
 
     private long id;
+
+    @NotBlank(message = "First name cannot be blank!")
+    @Size(min = 3, message = "First name must have minimum 3 characters!")
     private String firstName;
+
+    @NotBlank(message = "First name cannot be blank!")
+    @Size(min = 3, message = "Last name must have minimum 3 characters!")
     private String lastName;
+
+    @NotBlank
     private String address;
+    @Username
     private String username;
+
+    @Size(min = 8, message = "The password must have a minimum of 8 characters")
     private String password;
 
     public UserRegistrationDTO() {

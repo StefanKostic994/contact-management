@@ -6,6 +6,8 @@ import com.example.contactmanagment.services.UserRegistrationServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "api/v1/signUp")
 public class UserRegistrationController {
@@ -17,7 +19,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<UserInfoDTO> signUp(@RequestBody UserRegistrationDTO userRegistrationDTO) {
+    public ResponseEntity<UserInfoDTO> signUp(@Valid @RequestBody UserRegistrationDTO userRegistrationDTO) {
         UserInfoDTO userInfoDTOResponse = userService.signUp(userRegistrationDTO);
         return ResponseEntity.ok(userInfoDTOResponse);
     }
